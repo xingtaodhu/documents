@@ -1,0 +1,21 @@
+中星部署步骤
+/*解压导入镜像文件*/
+docker load -i zhongxing_backend.tar docker load -i zhongxing_frontend.tar
+docker load -i zhongxing_python.tar
+docker load -i zhongxing_mysql.tar
+
+/*创建桥接网络*/
+docker network create zhongxing
+
+/*启动db*/
+docker run -e MYSQL_ROOT_PASSWORD=123456 -p 3313:3306 -d --network zhongxing --network-alias db zhongxing_mysql:1.0
+
+/*启动系统后台*/
+docker run --network zhongxing --network-alias backend -d -p 8090:8090 zhongxing_backend:1.0
+
+/*启动算法后台*/
+docker run --network zhongxing --network-alias python -d -p 8832:8832 zhongxing_python:1.0
+
+/*启动前端*/
+docker run -p 8081:8081 -d --network zhongxing --network-alias frontend zhongxing_frontend:1.0
+  
