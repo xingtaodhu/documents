@@ -4,6 +4,7 @@ docker load -i zhongxing_backend.tar
 docker load -i zhongxing_frontend.tar
 docker load -i zhongxing_python.tar
 docker load -i zhongxing_mysql.tar
+docker load -i zhongxing_uploader.tar
 
 /*创建桥接网络*/
 docker network create zhongxing
@@ -19,4 +20,6 @@ docker run --network zhongxing --network-alias python -d -p 8832:8832 zhongxing_
 
 /*启动前端*/
 docker run -p 8081:8081 -d --network zhongxing --network-alias frontend zhongxing_frontend:1.0
-  
+
+/*启动文件上传服务*/
+docker run -p 5000:5000 -d --network zhongxing --network-alias uploader zhongxing_uploader:1.0
