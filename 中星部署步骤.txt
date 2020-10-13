@@ -1,6 +1,7 @@
 中星部署步骤
 /*解压导入镜像文件*/
-docker load -i zhongxing_backend.tar docker load -i zhongxing_frontend.tar
+docker load -i zhongxing_backend.tar
+docker load -i zhongxing_frontend.tar
 docker load -i zhongxing_python.tar
 docker load -i zhongxing_mysql.tar
 
